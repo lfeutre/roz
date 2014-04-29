@@ -9,13 +9,16 @@ roz
 Introduction
 ============
 
-Add content to me here!
+I've been carrying around a set of scripts (written in different languages)
+for several years which have helped me accomplish various management tasks
+for engineering teams (and teams of teams). This project reflects an attempt
+to bring those scripts together under a single framework.
 
 
 Dependencies
 ------------
 
-This project assumes that you have `rebar`_ installed somwhere in your
+This project assumes that you have `lfetool`_ installed somwhere in your
 ``$PATH``.
 
 This project depends upon the following, which are installed to the ``deps``
@@ -34,7 +37,7 @@ Just add it to your ``rebar.config`` deps:
 
     {deps, [
         ...
-        {roz, ".*", {git, "git@github.com:YOURNAME/roz.git", "master"}}
+        {roz, ".*", {git, "git@github.com:oubiwann/roz.git", "master"}}
       ]}.
 
 
