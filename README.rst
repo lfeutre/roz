@@ -1,7 +1,10 @@
-###########
+###
 roz
-###########
+###
 
+.. image:: resources/images/Roz-transback-sml.png
+
+*An Erlang Lisper's Tool for Team Management*
 
 Introduction
 ============
