@@ -1,7 +1,8 @@
 (defrecord roz-monster
-  id 
+  id
   (first '())
   (last '())
+  (nick '())
   (org '()))
 
 (defrecord roz-comment
