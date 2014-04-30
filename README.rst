@@ -49,10 +49,56 @@ And then do the usual:
     $ rebar compile
 
 
-Usage
-=====
+Download
+========
 
-Add content to me here!
+Get the code from github and compile it:
+
+.. code:: shell
+
+    $ git clone git@github.com:lfe/roz.git
+    $ cd roz
+    $ make get-deps
+    $ make compile
+
+
+CLI Usage
+=========
+
+TBD
+
+API Usage
+=========
+
+Update the ``data.mk`` file's ``DB`` variable to your company's name.
+
+Start the REPL:
+
+.. code:: bash
+
+    $ make mnesia-shell
+
+Prep the database (create schemas, start mnesia, create tables, etc,):
+
+.. code:: cl
+
+    > (slurp '"src/roz.lfe")
+    #(ok roz)
+    > (init)
+    #(status
+      #(create-schema ok)
+      #(start ok)
+      #(structure
+        #(ok
+          (#(create-set-tables
+             (#(atomic ok) #(atomic ok) #(atomic ok) #(atomic ok)))
+           #(create-bag-tables
+             (#(atomic ok) #(atomic ok) #(atomic ok) #(atomic ok)))))))
+    >
+
+Now you're ready to start using ``roz``:
+
+TBD
 
 .. Links
 .. -----
