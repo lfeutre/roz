@@ -87,7 +87,6 @@ Prep the database (create schemas, start mnesia, create tables, etc,):
     > (init)
     #(status
       #(create-schema ok)
-      #(start ok)
       #(structure
         #(ok
           (#(create-set-tables
