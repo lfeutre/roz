@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+LIBS="ERL_LIBS=`lfetool info erllibs`"
+LFE="$LIBS ./deps/lfe/bin/lfe"
+LFEC="$LIBS ./deps/lfe/bin/lfec"
+
+print-usage () {
+    lfe
+}
+
+error () {
+    message=$1
+    echo
+    echo $message
+    echo
+    print-usage $script
+    exit 1
+}
+
+unknown-command-error () {
+    command=$1
+    error "Unknown command: '$command'";
+}
+
+do-repl () {
+    echo "Starting roz REPL ..."
+    echo
+    make mnesia-shell
+}
+
+run () {
+    script=$0
+    command=$1
+    case $command in
+        -h|help)
+            echo
+            exit o
+            ;;
+        -v|version)
+            echo
+            exit 0
+            ;;
+        init)
+            echo
+            exit 0
+            ;;
+        repl)
+            do-repl
+            ;;
+        *)
+            unknown-command-error $command
+            ;;
+    esac
+}
+
+run "$@"
