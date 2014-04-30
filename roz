@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 
 LIBS="ERL_LIBS=`lfetool info erllibs`"
-LFE="$LIBS ./deps/lfe/bin/lfe"
+LFE="$LIBS ./deps/lfe/bin/lfe -noshell"
 LFEC="$LIBS ./deps/lfe/bin/lfec"
+FINISH="-s erlang halt"
 
 print-usage () {
     lfe
@@ -28,6 +29,12 @@ do-repl () {
     make mnesia-shell
 }
 
+do-init () {
+    echo "Initializing roz data ..."
+    echo
+    eval $LFE -s roz-script run roz init $FINISH
+}
+
 run () {
     script=$0
     command=$1
@@ -42,6 +49,7 @@ run () {
             ;;
         init)
             echo
+            do-init
             exit 0
             ;;
         repl)

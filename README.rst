@@ -62,21 +62,46 @@ Get the code from github and compile it:
     $ make compile
 
 
+Configuration
+=============
+
+Update the ``data.mk`` file's ``DB`` variable to your company's name.
+
+
 CLI Usage
 =========
 
-TBD
+roz REPL
+,,,,,,,,
+
+The following will start up an LFE REPL with the mnesia database (as 
+configured above) and all the dependency libs configured:
+
+.. code:: bash
+
+    $ ./roz repl
+
+
+Initialize roz Data
+,,,,,,,,,,,,,,,,,,,
+
+.. code:: bash
+
+    $ ./roz init
+
 
 API Usage
 =========
-
-Update the ``data.mk`` file's ``DB`` variable to your company's name.
 
 Start the REPL:
 
 .. code:: bash
 
-    $ make mnesia-shell
+    $ ./roz repl
+
+
+Initialize roz Data
+,,,,,,,,,,,,,,,,,,,
 
 Prep the database (create schemas, start mnesia, create tables, etc,):
 
