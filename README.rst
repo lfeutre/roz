@@ -37,7 +37,7 @@ Just add it to your ``rebar.config`` deps:
 
     {deps, [
         ...
-        {roz, ".*", {git, "git@github.com:oubiwann/roz.git", "master"}}
+        {roz, ".*", {git, "git@github.com:lfe/roz.git", "master"}}
       ]}.
 
 
