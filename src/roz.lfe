@@ -1,5 +1,11 @@
 (defmodule roz
   (export all))
 
-(defun my-adder (x y)
-  (+ x (+ y 1)))
+(defun noop ()
+  'noop)
+
+(defun init ()
+  (tuple 'status
+         (tuple 'create-schema (mnesia:create_schema (list (node))))
+         (tuple 'start (mnesia:start))
+         (tuple 'structure (roz-structure:init))))
