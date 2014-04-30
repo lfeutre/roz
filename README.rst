@@ -56,6 +56,6 @@ Add content to me here!
 
 .. Links
 .. -----
-.. _rebar: https://github.com/rebar/rebar
 .. _LFE: https://github.com/rvirding/lfe
 .. _lfeunit: https://github.com/lfe/lfeunit
+.. _lfetool: https://github.com/lfe/lfetool
