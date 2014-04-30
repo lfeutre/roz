@@ -1,0 +1,50 @@
+OPTS='-h -v'
+COMMANDS='help version init repl'
+NEW=''
+ADD=''
+INFO=''
+
+_get-roz-opts-and-commands () {
+    local cur prev      # current and previous completion word
+    COMPREPLY=()        # array for possible completions
+    cur=${COMP_WORDS[COMP_CWORD]}
+    prev=${COMP_WORDS[COMP_CWORD-1]}
+    case "$cur" in
+        -*)
+            COMPREPLY=($(compgen -W "${OPTS}" -- $cur))
+            ;;
+        *)
+            COMPREPLY=($(compgen -W "${COMMANDS} ${OPTS}" -- $cur))
+            ;;
+    esac
+    case "$prev" in
+        new)
+            COMPREPLY=($(compgen -W "${NEW}" -- $cur))
+            ;;
+        update)
+            COMPREPLY=($(compgen -W "${UPDATE}" -- $cur))
+            ;;
+        info)
+            COMPREPLY=($(compgen -W "${INFO}" -- $cur))
+            ;;
+        repl)
+            COMPREPLY=($(compgen -W "${REPL}" -- $cur))
+            ;;
+        # no more tab-completion for these ...
+        # XXX there has *got* to be a nicer way to do this; we want to have 
+        # no TAB-completion for *any* of the final commands ...
+        help)
+            COMPREPLY=($(compgen -W "" -- $cur))
+            ;;
+        version)
+            COMPREPLY=($(compgen -W "" -- $cur))
+            ;;
+        -*)
+            COMPREPLY=($(compgen -W "" -- $cur))
+            ;;
+    esac
+    return 0
+}
+
+complete -F _get-roz-opts-and-commands \
+    -o filenames `which roz` roz ./roz
