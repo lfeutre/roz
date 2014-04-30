@@ -28,27 +28,6 @@ directory of this project when you run ``make deps``:
 * `lfeunit`_ (needed only to run the unit tests)
 
 
-Installation
-============
-
-Just add it to your ``rebar.config`` deps:
-
-.. code:: erlang
-
-    {deps, [
-        ...
-        {roz, ".*", {git, "git@github.com:lfe/roz.git", "master"}}
-      ]}.
-
-
-And then do the usual:
-
-.. code:: bash
-
-    $ rebar get-deps
-    $ rebar compile
-
-
 Download
 ========
 
@@ -65,7 +44,7 @@ Get the code from github and compile it:
 Configuration
 =============
 
-Update the ``data.mk`` file's ``DB`` variable to your company's name.
+Update the ``company-name`` file to hold your company's name.
 
 
 CLI Usage
@@ -89,6 +68,17 @@ Initialize roz Data
 
     $ ./roz init
 
+
+Add Employees
+,,,,,,,,,,,,,
+
+This tool is called "roz" so employees or "reports" are necessarily called
+"monsters". You're welcome.
+
+.. code:: bash
+
+    $ ./roz add monster alice456 Alice Roberts \
+        Engineering "Software Development" "RabbitMQ Team"
 
 API Usage
 =========
