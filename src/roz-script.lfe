@@ -2,7 +2,7 @@
   (export all))
 
 (defun format-run (args)
-  (roz:start-db)
+  (application:ensure_started 'mnesia)
   (lfe_io:format
     '"~p~n" (list (run args))))
 

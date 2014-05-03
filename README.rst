@@ -78,7 +78,22 @@ Initialize roz Data
 .. code:: bash
 
     $ ./roz init
+    Initializing roz data ...
 
+
+    #(status
+      #(create-schema ok)
+      #(start-db ok)
+      #(structure
+        #(ok
+          (#(create-set-tables
+             (#(atomic ok)
+              #(atomic ok)
+              #(atomic ok)
+              #(atomic ok)
+              #(atomic ok)
+              #(atomic ok)))
+           #(create-bag-tables (#(atomic ok) #(atomic ok)))))))
 
 Add Data
 --------
@@ -126,12 +141,17 @@ Prep the database (create schemas, start mnesia, create tables, etc,):
     > (init)
     #(status
       #(create-schema ok)
+      #(start-db ok)
       #(structure
         #(ok
           (#(create-set-tables
-             (#(atomic ok) #(atomic ok) #(atomic ok) #(atomic ok)))
-           #(create-bag-tables
-             (#(atomic ok) #(atomic ok) #(atomic ok) #(atomic ok)))))))
+             (#(atomic ok)
+              #(atomic ok)
+              #(atomic ok)
+              #(atomic ok)
+              #(atomic ok)
+              #(atomic ok)))
+           #(create-bag-tables (#(atomic ok) #(atomic ok)))))))
     >
 
 Now you're ready to start using ``roz``:
