@@ -1,7 +1,6 @@
 OPTS='-h -v'
-COMMANDS='help version init repl'
-NEW=''
-ADD=''
+COMMANDS='help version init repl add'
+ADD='monster group team product'
 INFO=''
 
 _get-roz-opts-and-commands () {
@@ -18,8 +17,8 @@ _get-roz-opts-and-commands () {
             ;;
     esac
     case "$prev" in
-        new)
-            COMPREPLY=($(compgen -W "${NEW}" -- $cur))
+        add)
+            COMPREPLY=($(compgen -W "${ADD}" -- $cur))
             ;;
         update)
             COMPREPLY=($(compgen -W "${UPDATE}" -- $cur))
