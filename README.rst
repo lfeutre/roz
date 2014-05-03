@@ -6,6 +6,7 @@ roz
 
 *An Erlang Lisper's Tool for Team Management*
 
+
 Introduction
 ============
 
@@ -33,7 +34,7 @@ Download
 
 Get the code from github and compile it:
 
-.. code:: shell
+.. code:: bash
 
     $ git clone git@github.com:lfe/roz.git
     $ cd roz
@@ -59,8 +60,9 @@ that is):
 CLI Usage
 =========
 
+
 roz REPL
-,,,,,,,,
+--------
 
 The following will start up an LFE REPL with the mnesia database (as
 configured above) and all the dependency libs configured:
@@ -71,7 +73,7 @@ configured above) and all the dependency libs configured:
 
 
 Initialize roz Data
-,,,,,,,,,,,,,,,,,,,
+-------------------
 
 .. code:: bash
 
@@ -79,7 +81,7 @@ Initialize roz Data
 
 
 Add Data
-,,,,,,,,
+--------
 
 This tool is called "roz" so employees or "reports" are necessarily called
 "monsters". You're welcome.
@@ -113,7 +115,7 @@ Start the REPL:
 
 
 Initialize roz Data
-,,,,,,,,,,,,,,,,,,,
+-------------------
 
 Prep the database (create schemas, start mnesia, create tables, etc,):
 
@@ -134,7 +136,6 @@ Prep the database (create schemas, start mnesia, create tables, etc,):
 
 Now you're ready to start using ``roz``:
 
-TBD
 
 .. Links
 .. -----
