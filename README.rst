@@ -53,7 +53,7 @@ that is):
 
 .. code:: bash
 
-  $ . bash-complete
+  $ . resources/bash/complete
 
 
 CLI Usage
