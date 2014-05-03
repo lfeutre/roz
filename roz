@@ -4,7 +4,9 @@ DB_NAME=$(cat resources/config/company-name)
 LIBS="ERL_LIBS=`lfetool info erllibs`"
 SCRIPT_WRAP="-s roz-script format-run"
 DB="-mnesia dir \'\"$DB_NAME\"\'"
-LFE="$LIBS ./deps/lfe/bin/lfe -noshell $DB $SCRIPT_WRAP"
+#NODE="-sname roz"
+NODE=""
+LFE="$LIBS ./deps/lfe/bin/lfe -noshell $NODE $DB $SCRIPT_WRAP"
 LFEC="$LIBS ./deps/lfe/bin/lfec"
 FINISH="-s erlang halt"
 
@@ -43,14 +45,16 @@ do-repl () {
 do-init () {
     echo "Initializing roz data ..."
     echo
-    eval $LFE roz init $FINISH
+    command="$LFE roz init $FINISH"
+    #echo "command: $command"
+    eval $command|egrep -v '=INFO REPORT|application:|exited:|type:'
 }
 
 do-add-group () {
     echo "Adding group '$1' ..."
     echo
     command="$LFE roz-content add-group $@ $FINISH"
-    echo "comand: $command"
+    #echo "comand: $command"
     eval $command
 }
 
