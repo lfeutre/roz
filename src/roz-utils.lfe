@@ -5,7 +5,7 @@
   (lists:sort
     (lists:map
       (lambda (x) (element 1 x))
-      (application:loaded_applications))))
+      (application:which_applications))))
 
 (defun get-running ()
   (lists:sort
