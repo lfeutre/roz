@@ -144,44 +144,6 @@ Getting Info
 For a full list of allowed table info parameters, see `mnesia:table_info`_.
 
 
-API Usage
-=========
-
-Start the REPL:
-
-.. code:: bash
-
-    $ ./roz repl
-
-
-Initialize roz Data
--------------------
-
-Prep the database (create schemas, start mnesia, create tables, etc,):
-
-.. code:: cl
-
-    > (slurp '"src/roz.lfe")
-    #(ok roz)
-    > (init)
-    #(status
-      #(create-schema ok)
-      #(start-db ok)
-      #(structure
-        #(ok
-          (#(create-set-tables
-             (#(atomic ok)
-              #(atomic ok)
-              #(atomic ok)
-              #(atomic ok)
-              #(atomic ok)
-              #(atomic ok)))
-           #(create-bag-tables (#(atomic ok) #(atomic ok)))))))
-    >
-
-Now you're ready to start using ``roz``:
-
-
 .. Links
 .. -----
 .. _LFE: https://github.com/rvirding/lfe
