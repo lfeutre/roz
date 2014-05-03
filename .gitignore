@@ -8,4 +8,3 @@ ebin/*
 bin/expm
 *.dump
 .rebar
-company-name
