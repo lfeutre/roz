@@ -44,16 +44,16 @@ Get the code from github and compile it:
 Configuration
 =============
 
-Update the ``company-name`` file to hold your company's name. Don't use any
-punctuation or spaces in the name. This will be used to generate a directory
-in `pwd` where Mnesia data will be stored.
+Update the ``./resources/config/company-name`` file to hold your company's
+name. Don't use any punctuation or spaces in the name. This will be used to
+generate a directory in `pwd` where Mnesia data will be stored.
 
 Next, set up ``roz`` Bash auto-completion (if you use Bash as your shell,
 that is):
 
 .. code:: bash
 
-  $ . resources/bash/complete
+  $ . ./resources/bash/complete
 
 
 CLI Usage
@@ -94,7 +94,7 @@ that as well:
 
 .. code:: bash
 
-  $ ./roz add gruop "Software Development"
+  $ ./roz add group "Software Development"
   $ ./roz add team Messaging
   $ ./roz add product "Rabbit MQ"
 
