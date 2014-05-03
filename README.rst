@@ -69,7 +69,7 @@ configured above) and all the dependency libs configured:
 
 .. code:: bash
 
-    $ ./roz repl
+    $ ./bin/roz repl
 
 
 Initialize roz Data
@@ -77,7 +77,7 @@ Initialize roz Data
 
 .. code:: bash
 
-    $ ./roz init
+    $ ./bin/roz init
     Initializing roz data ...
 
 
@@ -103,7 +103,7 @@ This tool is called "roz" so employees or "reports" are necessarily called
 
 .. code:: bash
 
-    $ ./roz add monster alice456 Alice Roberts Engineering \
+    $ ./bin/roz add monster alice456 Alice Roberts Engineering \
           Software-Development Messaging RabbitMQ
 
 If you'd like to add groups, teams, and products ahead of time, you may do
@@ -111,12 +111,37 @@ that as well:
 
 .. code:: bash
 
-  $ ./roz add group Software-Development
-  $ ./roz add team Messaging
-  $ ./roz add product Rabbit-MQ
+  $ ./bin/roz add group Software-Development
+  $ ./bin/roz add team Messaging
+  $ ./bin/roz add product Rabbit-MQ
 
 Note that only single-word arguments are allowed. If your group, team, or
 project has more than one word in it, join them with a hyphen.
+
+
+Listing Data
+------------
+
+.. code:: bash
+
+    $ ./bin/roz list groups
+
+
+Getting Info
+------------
+
+.. code:: bash
+
+    $ ./bin/roz info db
+
+.. code:: bash
+
+    $ ./bin/roz info table group size
+    $ ./bin/roz info table group type
+    $ ./bin/roz info table group attributes
+    $ ./bin/roz info table group all
+
+For a full list of allowed table info parameters, see `mnesia:table_info`_.
 
 
 API Usage
@@ -163,3 +188,4 @@ Now you're ready to start using ``roz``:
 .. _lfeunit: https://github.com/lfe/lfeunit
 .. _lfetool: https://github.com/lfe/lfetool
 .. _roz: http://www.youtube.com/watch?v=RtWBlDC2-ss#t=16s
+.. _mnesia:table_info http://www.erlang.org/doc/man/mnesia.html#table_info-2
