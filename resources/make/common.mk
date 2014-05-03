@@ -33,10 +33,13 @@ get-deps:
 
 clean-ebin:
 	@echo "Cleaning ebin dir ..."
-	@rm -f $(OUT_DIR)/*.beam
+	@rm -rf $(OUT_DIR)/*.beam
+
+clean-rebar:
+	@rm -rf ./.rebar
 
 clean-eunit:
-	@PATH=$(SCRIPT_PATH) lfetool tests clean
+	@-PATH=$(SCRIPT_PATH) lfetool tests clean
 
 compile: get-deps clean-ebin
 	@echo "Compiling project code and dependencies ..."
@@ -59,7 +62,7 @@ shell-no-deps: compile-no-deps
 	@echo "Starting shell ..."
 	@PATH=$(SCRIPT_PATH) lfetool repl
 
-clean: clean-ebin clean-eunit
+clean: clean-ebin clean-eunit clean-rebar
 	@which rebar.cmd >/dev/null 2>&1 && rebar.cmd clean || rebar clean
 
 check-unit-only:
