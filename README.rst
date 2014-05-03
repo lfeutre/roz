@@ -87,16 +87,19 @@ This tool is called "roz" so employees or "reports" are necessarily called
 .. code:: bash
 
     $ ./roz add monster alice456 Alice Roberts Engineering \
-    "Software Development" Messaging RabbitMQ
+          Software-Development Messaging RabbitMQ
 
 If you'd like to add groups, teams, and products ahead of time, you may do
 that as well:
 
 .. code:: bash
 
-  $ ./roz add group "Software Development"
+  $ ./roz add group Software-Development
   $ ./roz add team Messaging
-  $ ./roz add product "Rabbit MQ"
+  $ ./roz add product Rabbit-MQ
+
+Note that only single-word arguments are allowed. If your group, team, or
+project has more than one word in it, join them with a hyphen.
 
 
 API Usage
