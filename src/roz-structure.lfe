@@ -10,15 +10,15 @@
     (create-table roz-monster ())
     (create-table roz-group ())
     (create-table roz-team ())
-    (create-table roz-product ())))
+    (create-table roz-product ())
+    (create-table roz-input (#(type bag)))
+    (create-table roz-output (#(type bag)))))
 
 (defun create-bag-tables ()
   "Define the tables whose entries can have multiple values."
   (list
     (create-table roz-comment (#(type bag)))
-    (create-table roz-rating (#(type bag)))
-    (create-table roz-input (#(type bag)))
-    (create-table roz-output (#(type bag)))))
+    (create-table roz-rating (#(type bag)))))
 
 (defun get-status (list-of-tuples)
   "Get the status for each table."
