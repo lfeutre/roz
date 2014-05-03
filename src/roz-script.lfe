@@ -2,19 +2,15 @@
   (export all))
 
 (defun format-run (args)
-  (application:ensure_started 'mnesia)
   (lfe_io:format
     '"~p~n" (list (run args))))
 
 (defun run (args)
-  (let* (((tuple (list mod func) args) (lists:split 2 args))
-         (new-args (list mod func (convert-args args))))
+  (roz-structure:wait)
+  (let (((tuple (list mod func) args) (lists:split 2 args)))
     ;; debug
     ;;(lfe_io:format '"new-args: ~p~n" (list new-args))
-    (apply #'dispatch/3 new-args)))
-
-(defun convert-args (args)
-  (lists:map #'atom_to_list/1 args))
+    (apply #'dispatch/3 (list mod func args))))
 
 (defun dispatch
   ((mod func '())
