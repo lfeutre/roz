@@ -11,8 +11,8 @@
     (create-table roz-group ())
     (create-table roz-team ())
     (create-table roz-product ())
-    (create-table roz-input (#(type bag)))
-    (create-table roz-output (#(type bag)))))
+    (create-table roz-input ())
+    (create-table roz-output ())))
 
 (defun create-bag-tables ()
   "Define the tables whose entries can have multiple values."
@@ -21,7 +21,11 @@
     (create-table roz-rating (#(type bag)))))
 
 (defun get-status (list-of-tuples)
-  "Get the status for each table."
+  "Get the overall status for a list of table status data.
+
+  If every table is okay, the dropwhile will return an empty list. Whereas any
+  non-ok table status will result in a non-empty list (and thus indicate an
+  error)."
   (case (lists:dropwhile (lambda (x) (== (element 2 x) 'ok))
                          list-of-tuples)
     ('() 'ok)
