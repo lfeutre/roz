@@ -62,9 +62,10 @@ do-info-db () {
 
 do-info-table () {
     tablename=$1
+    shift 1
     echo "Getting table info for '$tablename' ..."
     echo
-    command="$LFE roz-structure table-info $@ $FINISH"
+    command="$LFE roz-structure table-info roz-$tablename $@ $FINISH"
     #echo "comand: $command"
     eval $command
 }
