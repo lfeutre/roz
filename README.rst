@@ -13,7 +13,7 @@ Introduction
 I've been carrying around a set of scripts (written in different languages)
 for several years which have helped me accomplish various management tasks
 for engineering teams (and teams of teams). This project reflects an attempt
-to bring those scripts together under a single framework.
+to bring those scripts together under a single framework: `roz`_.
 
 
 Dependencies
@@ -142,3 +142,4 @@ Now you're ready to start using ``roz``:
 .. _LFE: https://github.com/rvirding/lfe
 .. _lfeunit: https://github.com/lfe/lfeunit
 .. _lfetool: https://github.com/lfe/lfetool
+.. _roz: http://www.youtube.com/watch?v=RtWBlDC2-ss#t=16s
