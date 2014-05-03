@@ -11,6 +11,6 @@
 
 (defun init ()
   `#(status
-    ;; note that create_schema starts the mnesia database
     #(create-schema ,(mnesia:create_schema (list (node))))
+    #(start-db ,(start-db))
     #(structure ,(roz-structure:init))))
