@@ -3,13 +3,13 @@
 
 (include-lib "include/records.lfe")
 
-(defun add-monster (first last nick org)
+(defun add-monster (nick first last org group team product)
   "A utility function for adding an entry to the monster table."
  (let* ((id (lfe-utils:uuid4 #(type list)))
         (monster (make-roz-monster id id
+                                   nick nick
                                    first first
                                    last last
-                                   nick nick
                                    org org)))
    (mnesia:transaction (lambda () (mnesia:write monster)))))
 
@@ -17,8 +17,22 @@
   "A utility function for populating the monster table from a list of lists."
   (('())
    'ok)
-  (((cons (list first last nick org) tail))
-   (add-monster first last nick org)
+  (((cons (list nick first last org group team product) tail))
+   (add-monster nick first last org group team product)
+   (add-monsters tail)))
+
+(defun add-group (name)
+  "A utility function for adding an entry to the group table."
+ (let* ((id (lfe-utils:uuid4 #(type list)))
+        (group (make-roz-group id id name name)))
+   (mnesia:transaction (lambda () (mnesia:write group)))))
+
+(defun add-groups
+  "A utility function for populating the group table from a list of lists."
+  (('())
+   'ok)
+  (((cons (list name) tail))
+   (add-group name)
    (add-monsters tail)))
 
 ; (defun insert-employee (employee department-id project-names)
