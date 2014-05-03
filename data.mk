@@ -1,4 +1,4 @@
-DB=company-name
+DB=$(shell cat company-name)
 
 mnesia-shell: compile-no-deps
 	clear
