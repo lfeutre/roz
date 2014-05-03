@@ -5,13 +5,12 @@
 
 (defun add-monster (nick first last org group team product)
   "A utility function for adding an entry to the monster table."
- (let* ((id (lfe-utils:uuid4 #(type list)))
-        (monster (make-roz-monster id id
-                                   nick nick
-                                   first first
-                                   last last
-                                   org org)))
-   (mnesia:transaction (lambda () (mnesia:write monster)))))
+  (let* ((monster (make-roz-monster nick nick
+                                    first first
+                                    last last
+                                    org org)))
+    (add-group group)
+    (mnesia:transaction (lambda () (mnesia:write monster)))))
 
 (defun add-monsters
   "A utility function for populating the monster table from a list of lists."
@@ -23,9 +22,8 @@
 
 (defun add-group (name)
   "A utility function for adding an entry to the group table."
- (let* ((id (lfe-utils:uuid4 #(type list)))
-        (group (make-roz-group id id name name)))
-   (mnesia:transaction (lambda () (mnesia:write group)))))
+  (let* ((group (make-roz-group group-name (atom_to_list name))))
+    (mnesia:transaction (lambda () (mnesia:write group)))))
 
 (defun add-groups
   "A utility function for populating the group table from a list of lists."
@@ -33,7 +31,7 @@
    'ok)
   (((cons (list name) tail))
    (add-group name)
-   (add-monsters tail)))
+   (add-groups tail)))
 
 ; (defun insert-employee (employee department-id project-names)
 ;   "A utility function for populating the employee table and updating all the
