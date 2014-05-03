@@ -4,21 +4,25 @@
 (include-lib "include/records.lfe")
 (include-lib "deps/lfe-utils/include/mnesia-macros.lfe")
 
-(defun create-set-tables ()
+(defun create-set-tables (default-attrs)
   "Define the tables that need unique entries."
-  (list
-    (create-table roz-monster ())
-    (create-table roz-group ())
-    (create-table roz-team ())
-    (create-table roz-product ())
-    (create-table roz-input ())
-    (create-table roz-output ())))
+  (let ((attrs (++ default-attrs '(#(type set)))))
+    ;;(io:format '"~p~n" (list attrs))
+    ;;(lfe_io:format '"~p~n" (list attrs))
+    (list
+      (create-table roz-monster attrs)
+      (create-table roz-group attrs)
+      (create-table roz-team attrs)
+      (create-table roz-product attrs)
+      (create-table roz-input attrs)
+      (create-table roz-output attrs))))
 
-(defun create-bag-tables ()
+(defun create-bag-tables (default-attrs)
   "Define the tables whose entries can have multiple values."
-  (list
-    (create-table roz-comment (#(type bag)))
-    (create-table roz-rating (#(type bag)))))
+  (let ((attrs (++ default-attrs '(#(type bag)))))
+    (list
+      (create-table roz-comment attrs)
+      (create-table roz-rating attrs))))
 
 (defun get-status (list-of-tuples)
   "Get the overall status for a list of table status data.
@@ -31,12 +35,23 @@
     ('() 'ok)
     (_ 'error)))
 
+(defun table-info
+  ((table-name (cons info-key _))
+    (mnesia:table_info table-name info-key)))
+
 (defun init ()
-  (let* ((sets (create-set-tables))
-         (bags (create-bag-tables))
+  (let* ((attrs `(#(disc_copies (,(node)))))
+         (sets (create-set-tables attrs))
+         (bags (create-bag-tables attrs))
          (status (get-status (++ sets bags))))
     (tuple
       status
       (list
         (tuple 'create-set-tables sets)
         (tuple 'create-bag-tables bags)))))
+
+(defun wait ()
+  (mnesia:wait_for_tables
+    '(roz-monster roz-comment roz-rating roz-group roz-team roz-product
+      roz-input roz-output)
+    5000))
