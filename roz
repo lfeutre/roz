@@ -1,7 +1,10 @@
 #!/usr/bin/env bash
 
+DB_NAME=$(cat company-name)
 LIBS="ERL_LIBS=`lfetool info erllibs`"
-LFE="$LIBS ./deps/lfe/bin/lfe -noshell"
+SCRIPT_WRAP="-s roz-script format-run"
+DB="-mnesia dir \'\"$DB_NAME\"\'"
+LFE="$LIBS ./deps/lfe/bin/lfe -noshell $DB $SCRIPT_WRAP"
 LFEC="$LIBS ./deps/lfe/bin/lfec"
 FINISH="-s erlang halt"
 
@@ -23,6 +26,14 @@ unknown-command-error () {
     error "Unknown command: '$command'";
 }
 
+do-help () {
+    echo
+}
+
+do-version () {
+    echo
+}
+
 do-repl () {
     echo "Starting roz REPL ..."
     echo
@@ -32,24 +43,49 @@ do-repl () {
 do-init () {
     echo "Initializing roz data ..."
     echo
-    eval $LFE -s roz-script run roz init $FINISH
+    eval $LFE roz init $FINISH
+}
+
+do-add-group () {
+    echo "Adding group '$1' ..."
+    echo
+    command="$LFE roz-content add-group $@ $FINISH"
+    #echo "comand: $command"
+    eval $command
+}
+
+run-add () {
+    subcommand=$1
+    groupname=$2
+    case $subcommand in
+        group)
+            echo
+            do-add-group "$groupname"
+            exit 0
+            ;;
+    esac
 }
 
 run () {
     script=$0
     command=$1
+    subcommand=$2
+    shift 2
     case $command in
         -h|help)
-            echo
+            do-help
             exit o
             ;;
         -v|version)
-            echo
+            do-version
             exit 0
             ;;
         init)
-            echo
             do-init
+            exit 0
+            ;;
+        add)
+            do-add-group $cubcommand "$@"
             exit 0
             ;;
         repl)
