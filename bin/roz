@@ -1,0 +1,168 @@
+#!/usr/bin/env bash
+
+DB_NAME=$(cat resources/config/company-name)
+LIBS="ERL_LIBS=`lfetool info erllibs`"
+SCRIPT_WRAP="-s roz-script format-run"
+DB="-mnesia dir \'\"$DB_NAME\"\'"
+#NODE="-sname roz"
+NODE=""
+START="-s mnesia start"
+LFE="$LIBS ./deps/lfe/bin/lfe -noshell $NODE $DB $START $SCRIPT_WRAP"
+LFE_INIT="$LIBS ./deps/lfe/bin/lfe -noshell $NODE $DB $SCRIPT_WRAP"
+LFEC="$LIBS ./deps/lfe/bin/lfec"
+FINISH="-s mnesia stop -s erlang halt"
+
+print-usage () {
+    lfe
+}
+
+error () {
+    message=$1
+    echo
+    echo $message
+    echo
+    print-usage $script
+    exit 1
+}
+
+unknown-command-error () {
+    command=$1
+    error "Unknown command: '$command'";
+}
+
+do-help () {
+    echo
+}
+
+do-version () {
+    echo
+}
+
+do-repl () {
+    echo "Starting roz REPL ..."
+    echo
+    make mnesia-shell
+}
+
+do-init () {
+    echo "Initializing roz data ..."
+    echo
+    command="$LFE_INIT roz init $FINISH"
+    #echo "command: $command"
+    eval $command
+}
+
+do-info-db () {
+    echo "Getting DB info ..."
+    echo
+    command="$LFE mnesia info $FINISH"
+    #echo "comand: $command"
+    eval $command
+}
+
+do-info-table () {
+    tablename=$1
+    echo "Getting table info for '$tablename' ..."
+    echo
+    command="$LFE roz-structure table-info $@ $FINISH"
+    #echo "comand: $command"
+    eval $command
+}
+
+do-add-group () {
+    echo "Adding group '$1' ..."
+    echo
+    command="$LFE roz-content add-group $@ $FINISH"
+    #echo "comand: $command"
+    eval $command
+}
+
+do-list-groups () {
+    echo "Getting list of all groups ..."
+    echo
+    command="$LFE roz-querying list-groups $FINISH"
+    #echo "comand: $command"
+    eval $command
+}
+
+run-info () {
+    subcommand=$1
+    shift 1
+    name=$2
+    case $subcommand in
+        db)
+            echo
+            do-info-db
+            exit 0
+            ;;
+        table)
+            echo
+            do-info-table "$@"
+            exit 0
+            ;;
+    esac
+}
+
+run-add () {
+    subcommand=$1
+    name=$2
+    case $subcommand in
+        group)
+            echo
+            do-add-group "$name"
+            exit 0
+            ;;
+    esac
+}
+
+run-list () {
+    subcommand=$1
+    name=$2
+    case $subcommand in
+        groups)
+            echo
+            do-list-groups
+            exit 0
+            ;;
+    esac
+}
+run () {
+    script=$0
+    command=$1
+    subcommand=$2
+    shift 2
+    case $command in
+        -h|help)
+            do-help
+            exit o
+            ;;
+        -v|version)
+            do-version
+            exit 0
+            ;;
+        init)
+            do-init
+            exit 0
+            ;;
+        info)
+            run-info $subcommand "$@"
+            exit 0
+            ;;
+        add)
+            run-add $subcommand "$@"
+            exit 0
+            ;;
+        list)
+            run-list $subcommand "$@"
+            exit 0
+            ;;
+        repl)
+            do-repl
+            ;;
+        *)
+            unknown-command-error $command
+            ;;
+    esac
+}
+
+run "$@" | egrep -v '^ok$'
