@@ -1,5 +1,4 @@
 (defrecord roz-monster
-  (id '())
   (nick '())
   (first '())
   (last '())
@@ -19,49 +18,49 @@
   value)
 
 (defrecord roz-group
-  (id '())
-  (name '()))
+  group-name
+  ignored)
 
 (defrecord roz-team
-  (id '())
-  (name '()))
+  team-name
+  ignored)
 
 (defrecord roz-product
-  (id '())
-  (name '()))
+  product-name
+  ignored)
 
 (defrecord roz-input
-  (id '())
-  (name '()))
+  input-name
+  ignored)
 
 (defrecord roz-output
-  (id '())
-  (name '()))
+  output-name
+  ignored)
 
 (defrecord comment-link
-  monster-id
+  monster-nick
   comment-id)
 
 (defrecord rating-link
-  monster-id
+  monster-nick
   rating-id)
 
 (defrecord group-link
-  monster-id
-  group-id)
+  monster-nick
+  group-name)
 
 (defrecord team-link
-  monster-id
-  team-id)
+  monster-nick
+  team-name)
 
 (defrecord product-link
-  monster-id
-  product-id)
+  monster-nick
+  product-name)
 
 (defrecord output-link
-  product-id
-  output-id)
+  product-name
+  output-name)
 
 (defrecord input-link
-  product-id
-  input-id)
+  product-nick
+  input-name)
