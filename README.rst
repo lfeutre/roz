@@ -44,7 +44,16 @@ Get the code from github and compile it:
 Configuration
 =============
 
-Update the ``company-name`` file to hold your company's name.
+Update the ``company-name`` file to hold your company's name. Don't use any
+punctuation or spaces in the name. This will be used to generate a directory
+in `pwd` where Mnesia data will be stored.
+
+Next, set up ``roz`` Bash auto-completion (if you use Bash as your shell,
+that is):
+
+.. code:: bash
+
+  $ . bash-complete
 
 
 CLI Usage
@@ -53,7 +62,7 @@ CLI Usage
 roz REPL
 ,,,,,,,,
 
-The following will start up an LFE REPL with the mnesia database (as 
+The following will start up an LFE REPL with the mnesia database (as
 configured above) and all the dependency libs configured:
 
 .. code:: bash
@@ -69,16 +78,26 @@ Initialize roz Data
     $ ./roz init
 
 
-Add Employees
-,,,,,,,,,,,,,
+Add Data
+,,,,,,,,
 
 This tool is called "roz" so employees or "reports" are necessarily called
 "monsters". You're welcome.
 
 .. code:: bash
 
-    $ ./roz add monster alice456 Alice Roberts \
-        Engineering "Software Development" "RabbitMQ Team"
+    $ ./roz add monster alice456 Alice Roberts Engineering \
+    "Software Development" Messaging RabbitMQ
+
+If you'd like to add groups, teams, and products ahead of time, you may do
+that as well:
+
+.. code:: bash
+
+  $ ./roz add gruop "Software Development"
+  $ ./roz add team Messaging
+  $ ./roz add product "Rabbit MQ"
+
 
 API Usage
 =========
