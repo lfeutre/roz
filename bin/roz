@@ -43,12 +43,12 @@ clean-ok () {
     egrep -v '^ok$'
 }
 
-do-help () {
-    echo
-}
-
 do-version () {
+    echo "Version info:"
     echo
+    command="$LFE_INIT roz-utils get-version $FINISH"
+    #echo "command: $command"
+    eval $command
 }
 
 do-repl () {
@@ -56,7 +56,7 @@ do-repl () {
     echo
     command="ERL_LIBS=$(lfetool info erllibs) \
     PATH=$(lfetool info path) lfe $DB $@"
-    echo "command: $command"
+    #echo "command: $command"
     eval $command
 }
 
