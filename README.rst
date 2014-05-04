@@ -71,6 +71,16 @@ configured above) and all the dependency libs configured:
 
     $ ./bin/roz repl
 
+Result:
+
+.. code:: bash
+
+    Starting roz REPL ...
+
+    Erlang R16B03-1 (erts-5.10.4) [source] [64-bit] [smp:8:8] [async-threads:10] [hipe] [kernel-poll:false]
+
+    LFE Shell V5.10.4 (abort with ^G)
+    >
 
 Version
 -------
@@ -101,6 +111,22 @@ Help
     $ ./bin/roz -h
     $ ./bin/roz help
 
+Output:
+
+.. code:: bash
+
+    Usage: ./bin/roz <command> <subcommand> [<args>]
+
+    The easiest way to use roz is with the bash tab-completion script provided:
+      $ . ./resources/bash/completion
+
+    Available commands include: help, version, init, repl, add, info, list.
+
+    Some of these have subcommands.
+
+    Full documentation for all the commands is avaiable here:
+      https://github.com/lfe/roz/blob/master/README.rst#cli-usage
+      
 These are also printed when an error is caught in the script.
 
 
