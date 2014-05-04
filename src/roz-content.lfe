@@ -33,6 +33,19 @@
    (add-group name)
    (add-groups tail)))
 
+(defun add-team (name)
+  "A utility function for adding an entry to the team table."
+  (let* ((team (make-roz-team team-name (atom_to_list name))))
+    (mnesia:transaction (lambda () (mnesia:write team)))))
+
+(defun add-teams
+  "A utility function for populating the group table from a list of lists."
+  (('())
+   'ok)
+  (((cons (list name) tail))
+   (add-team name)
+   (add-teams tail)))
+
 ; (defun insert-employee (employee department-id project-names)
 ;   "A utility function for populating the employee table and updating all the
 ;   associated relationships."

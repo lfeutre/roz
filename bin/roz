@@ -82,10 +82,26 @@ do-add-group () {
     eval $command
 }
 
+do-add-team () {
+    echo "Adding team '$1' ..."
+    echo
+    command="$LFE roz-content add-team $@ $FINISH"
+    #echo "comand: $command"
+    eval $command
+}
+
 do-list-groups () {
     echo "Getting list of all groups ..."
     echo
     command="$LFE roz-querying list-groups $FINISH"
+    #echo "comand: $command"
+    eval $command
+}
+
+do-list-teams () {
+    echo "Getting list of all teams ..."
+    echo
+    command="$LFE roz-querying list-teams $FINISH"
     #echo "comand: $command"
     eval $command
 }
@@ -117,6 +133,11 @@ run-add () {
             do-add-group "$name"
             exit 0
             ;;
+        team)
+            echo
+            do-add-team "$name"
+            exit 0
+            ;;
     esac
 }
 
@@ -127,6 +148,11 @@ run-list () {
         groups)
             echo
             do-list-groups
+            exit 0
+            ;;
+        teams)
+            echo
+            do-list-teams
             exit 0
             ;;
     esac

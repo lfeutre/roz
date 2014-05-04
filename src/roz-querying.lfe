@@ -5,7 +5,7 @@
 (include-lib "include/records.lfe")
 (include-lib "deps/lfe-utils/include/mnesia-macros.lfe")
 
-(defun list-data (table-name)
+(defun query-data (table-name)
   (mnesia:transaction
     (lambda ()
       (mnesia:foldl
@@ -14,7 +14,7 @@
         table-name))))
 
 (defun process-data (table-name fn)
-  (let (((tuple 'atomic data) (list-data table-name)))
+  (let (((tuple 'atomic data) (query-data table-name)))
     (lists:map
       (lambda (x) (funcall fn x))
       data))
@@ -29,3 +29,8 @@
   (process-data
     'roz-group
     (lambda (x) (lfe_io:format '"~s~n" (list (roz-group-group-name x))))))
+
+(defun list-teams ()
+  (process-data
+    'roz-team
+    (lambda (x) (lfe_io:format '"~s~n" (list (roz-team-team-name x))))))
