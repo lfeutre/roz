@@ -13,7 +13,11 @@ LFEC="$LIBS ./deps/lfe/bin/lfec"
 FINISH="-s mnesia stop -s erlang halt"
 
 print-usage () {
-    lfe
+    scriptpath=$1
+    scriptname=$(basename $scriptpath)
+    command="$LFE roz-script-help usage $scriptpath $scriptname $FINISH"
+    #echo "comand: $command"
+    eval $command
 }
 
 error () {
@@ -28,6 +32,11 @@ error () {
 unknown-command-error () {
     command=$1
     error "Unknown command: '$command'";
+}
+
+unknown-subcommand-error () {
+    subcommand=$1
+    error "Unknown subcommand: '$subcommand'";
 }
 
 do-help () {
@@ -137,6 +146,9 @@ run-info () {
             do-info-table "$@"
             exit 0
             ;;
+        *)
+            unknown-subcommand-error $subcommand
+            ;;
     esac
 }
 
@@ -159,6 +171,9 @@ run-add () {
             do-add-product "$name"
             exit 0
             ;;
+        *)
+            unknown-subcommand-error $subcommand
+            ;;
     esac
 }
 
@@ -180,6 +195,9 @@ run-list () {
             echo
             do-list-products
             exit 0
+            ;;
+        *)
+            unknown-subcommand-error $subcommand
             ;;
     esac
 }
