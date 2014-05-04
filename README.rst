@@ -72,6 +72,15 @@ configured above) and all the dependency libs configured:
     $ ./bin/roz repl
 
 
+Version
+-------
+
+.. code:: bash
+
+    $ ./bin/roz -v
+    $ ./bin/roz version
+
+
 Help
 ----
 
@@ -154,7 +163,15 @@ Getting Info
     $ ./bin/roz info table group attributes
     $ ./bin/roz info table group all
 
-For a full list of allowed table info parameters, see the mnesia `mnesia:table_info`_ docs.
+For a full list of allowed table info parameters, see the
+`mnesia:table_info`_ docs.
+
+The ``info`` command also has aliases for ``help`` and ``version``:
+
+.. code:: bash
+
+    $ ./bin/roz info usage
+    $ ./bin/roz info version
 
 
 .. Links
