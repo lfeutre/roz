@@ -72,6 +72,17 @@ configured above) and all the dependency libs configured:
     $ ./bin/roz repl
 
 
+Help
+----
+
+.. code:: bash
+
+    $ ./bin/roz -h
+    $ ./bin/roz help
+
+These are also printed when an error is caught in the script.
+
+
 Initialize roz Data
 -------------------
 
@@ -125,6 +136,8 @@ Listing Data
 .. code:: bash
 
     $ ./bin/roz list groups
+    $ ./bin/roz list teams
+    $ ./bin/roz list products
 
 
 Getting Info
