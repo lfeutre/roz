@@ -141,7 +141,7 @@ Getting Info
     $ ./bin/roz info table group attributes
     $ ./bin/roz info table group all
 
-For a full list of allowed table info parameters, see `mnesia:table_info`_.
+For a full list of allowed table info parameters, see the mnesia `mnesia:table_info`_ docs.
 
 
 .. Links
@@ -150,4 +150,4 @@ For a full list of allowed table info parameters, see `mnesia:table_info`_.
 .. _lfeunit: https://github.com/lfe/lfeunit
 .. _lfetool: https://github.com/lfe/lfetool
 .. _roz: http://www.youtube.com/watch?v=RtWBlDC2-ss#t=16s
-.. _mnesia:table_info http://www.erlang.org/doc/man/mnesia.html#table_info-2
+.. _mnesia:table_info: http://www.erlang.org/doc/man/mnesia.html#table_info-2
