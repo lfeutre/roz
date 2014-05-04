@@ -6,8 +6,7 @@
 
 (defun usage
   ((script-path (cons script-name _))
-    (io:format '"
-Usage: ~s <command> <subcommand> [<args>]
+    (io:format '"Usage: ~s <command> <subcommand> [<args>]
 
 The easiest way to use ~s is with the bash tab-completion script provided:
   $ . ./resources/bash/completion
@@ -18,6 +17,4 @@ Some of these have subcommands.
 
 Full documentation for all the commands is avaiable here:
   https://github.com/lfe/roz/blob/master/README.rst#cli-usage
-
-
 " (list (atom_to_list script-path) (atom_to_list script-name)))))
