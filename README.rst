@@ -82,7 +82,7 @@ Version
 
 Output:
 
-.. code:: bash
+.. code:: cl
 
     Version info:
 
@@ -113,7 +113,7 @@ Initialize roz Data
     
 Output:
 
-.. code:: bash
+.. code:: cl
 
     Initializing roz data ...
 
@@ -189,7 +189,7 @@ Getting Info
 
 Sample output:
 
-.. code:: bash
+.. code:: erlang
 
     Getting DB info ...
 
@@ -236,7 +236,7 @@ Sample output:
     
 Sample uutput for that last command:
 
-.. code:: bash
+.. code:: cl
 
     Getting table info for 'monster', key 'attributes' ...
 
