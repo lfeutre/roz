@@ -208,7 +208,7 @@ run () {
     shift 2
     case $command in
         -h|help)
-            do-help
+            print-usage $script $(basename script)
             exit o
             ;;
         -v|version)
