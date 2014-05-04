@@ -25,7 +25,7 @@ error () {
     echo
     echo $message
     echo
-    print-usage $script
+    print-usage $script | clean-ok
     exit 1
 }
 
@@ -39,6 +39,10 @@ unknown-subcommand-error () {
     error "Unknown subcommand: '$subcommand'";
 }
 
+clean-ok () {
+    egrep -v '^ok$'
+}
+
 do-help () {
     echo
 }
@@ -50,7 +54,10 @@ do-version () {
 do-repl () {
     echo "Starting roz REPL ..."
     echo
-    make mnesia-shell
+    command="ERL_LIBS=$(lfetool info erllibs) \
+    PATH=$(lfetool info path) lfe $DB $@"
+    echo "command: $command"
+    eval $command
 }
 
 do-init () {
@@ -208,31 +215,33 @@ run () {
     shift 2
     case $command in
         -h|help)
-            print-usage $script $(basename script)
-            exit o
+            print-usage $script $(basename script) | clean-ok
+            exit 0
             ;;
         -v|version)
             do-version
             exit 0
             ;;
         init)
-            do-init
+            do-init | clean-ok
             exit 0
             ;;
         info)
-            run-info $subcommand "$@"
+            run-info $subcommand "$@" | clean-ok
             exit 0
             ;;
         add)
-            run-add $subcommand "$@"
+            run-add $subcommand "$@" | clean-ok
             exit 0
             ;;
         list)
-            run-list $subcommand "$@"
+            run-list $subcommand "$@" | clean-ok
             exit 0
             ;;
         repl)
-            do-repl
+            shift 1
+            do-repl "$@"
+            exit 0
             ;;
         *)
             unknown-command-error $command
@@ -240,4 +249,4 @@ run () {
     esac
 }
 
-run "$@" | egrep -v '^ok$'
+run "$@"
