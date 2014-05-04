@@ -119,7 +119,9 @@ Add Data
 --------
 
 This tool is called "roz" so employees or "reports" are necessarily called
-"monsters". You're welcome.
+"monsters". You're welcome. (Honestly, it is much more fun for everyone;
+better a Monsters Inc. refernece than the dry, soulless specturm of terms
+such as "report", "employee", "worker", "member", "user", etc.)
 
 .. code:: bash
 
@@ -147,6 +149,7 @@ Listing Data
     $ ./bin/roz list groups
     $ ./bin/roz list teams
     $ ./bin/roz list products
+    $ ./bin/roz list monsters
 
 
 Getting Info
