@@ -150,9 +150,9 @@ that as well:
 
 .. code:: bash
 
-  $ ./bin/roz add group Software-Development
-  $ ./bin/roz add team Messaging
-  $ ./bin/roz add product Rabbit-MQ
+    $ ./bin/roz add group Software-Development
+    $ ./bin/roz add team Messaging
+    $ ./bin/roz add product Rabbit-MQ
 
 Note that only single-word arguments are allowed. If your group, team, or
 project has more than one word in it, join them with a hyphen.
@@ -172,7 +172,7 @@ Sample output:
 
 .. code:: bash
 
-Getting list of all monsters ...
+    Getting list of all monsters ...
 
     * Carol, Bob (bob321)
     * Davids, Carol (carol890)
@@ -234,7 +234,7 @@ Sample output:
     $ ./bin/roz info table product type
     $ ./bin/roz info table monsters attributes
     
-Sample uutput for that last command:
+Sample output for that last command:
 
 .. code:: cl
 
