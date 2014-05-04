@@ -58,4 +58,4 @@ _get-roz-opts-and-commands () {
 }
 
 complete -F _get-roz-opts-and-commands \
-    -o filenames `which roz` roz ./bin/roz
+    -o filenames ./bin/roz
