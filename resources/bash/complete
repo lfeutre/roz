@@ -1,7 +1,7 @@
 OPTS='-h -v'
 COMMANDS='help version init repl add info list'
 ADD='monster group team product'
-INFO='table db'
+INFO='table db version usage'
 LIST='groups teams products'
 TABLES='monster comment rating group product input output team'
 TABLE_INFO='all access_mode arity attributes checkpoints cookie disc_copies disc_only_copies index load_node load_order load_reason local_content master_nodes memory ram_copies record_name size snmp storage_type subscribers type user_properties version where_to_read where_to_write wild_pattern'

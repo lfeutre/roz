@@ -139,9 +139,10 @@ do-list-products () {
 }
 
 run-info () {
-    subcommand=$1
-    shift 1
-    name=$2
+    script=$1
+    subcommand=$2
+    name=$3
+    shift 2
     case $subcommand in
         db)
             echo
@@ -151,6 +152,16 @@ run-info () {
         table)
             echo
             do-info-table "$@"
+            exit 0
+            ;;
+        version)
+            echo
+            do-version
+            exit 0
+            ;;
+        usage)
+            echo
+            print-usage $script $(basename $script)
             exit 0
             ;;
         *)
@@ -227,7 +238,7 @@ run () {
             exit 0
             ;;
         info)
-            run-info $subcommand "$@" | clean-ok
+            run-info $script $subcommand "$@" | clean-ok
             exit 0
             ;;
         add)
