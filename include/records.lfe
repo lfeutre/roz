@@ -37,30 +37,30 @@
   output-name
   ignored)
 
-(defrecord comment-link
+(defrecord roz-comment-link
   monster-nick
   comment-id)
 
-(defrecord rating-link
+(defrecord roz-rating-link
   monster-nick
   rating-id)
 
-(defrecord group-link
+(defrecord roz-group-link
   monster-nick
   group-name)
 
-(defrecord team-link
+(defrecord roz-team-link
   monster-nick
   team-name)
 
-(defrecord product-link
+(defrecord roz-product-link
   monster-nick
   product-name)
 
-(defrecord output-link
+(defrecord roz-output-link
   product-name
   output-name)
 
-(defrecord input-link
+(defrecord roz-input-link
   product-nick
   input-name)
