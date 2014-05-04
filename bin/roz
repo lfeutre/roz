@@ -90,6 +90,14 @@ do-add-team () {
     eval $command
 }
 
+do-add-product () {
+    echo "Adding product '$1' ..."
+    echo
+    command="$LFE roz-content add-product $@ $FINISH"
+    #echo "comand: $command"
+    eval $command
+}
+
 do-list-groups () {
     echo "Getting list of all groups ..."
     echo
@@ -102,6 +110,14 @@ do-list-teams () {
     echo "Getting list of all teams ..."
     echo
     command="$LFE roz-querying list-teams $FINISH"
+    #echo "comand: $command"
+    eval $command
+}
+
+do-list-products () {
+    echo "Getting list of all products ..."
+    echo
+    command="$LFE roz-querying list-products $FINISH"
     #echo "comand: $command"
     eval $command
 }
@@ -138,6 +154,11 @@ run-add () {
             do-add-team "$name"
             exit 0
             ;;
+        product)
+            echo
+            do-add-product "$name"
+            exit 0
+            ;;
     esac
 }
 
@@ -153,6 +174,11 @@ run-list () {
         teams)
             echo
             do-list-teams
+            exit 0
+            ;;
+        products)
+            echo
+            do-list-products
             exit 0
             ;;
     esac

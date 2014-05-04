@@ -34,3 +34,8 @@
   (process-data
     'roz-team
     (lambda (x) (lfe_io:format '"~s~n" (list (roz-team-team-name x))))))
+
+(defun list-products ()
+  (process-data
+    'roz-product
+    (lambda (x) (lfe_io:format '"~s~n" (list (roz-product-product-name x))))))

@@ -46,6 +46,19 @@
    (add-team name)
    (add-teams tail)))
 
+(defun add-product (name)
+  "A utility function for adding an entry to the product table."
+  (let* ((product (make-roz-product product-name (atom_to_list name))))
+    (mnesia:transaction (lambda () (mnesia:write product)))))
+
+(defun add-products
+  "A utility function for populating the product table from a list of lists."
+  (('())
+   'ok)
+  (((cons (list name) tail))
+   (add-product name)
+   (add-products tail)))
+
 ; (defun insert-employee (employee department-id project-names)
 ;   "A utility function for populating the employee table and updating all the
 ;   associated relationships."
