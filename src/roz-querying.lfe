@@ -13,29 +13,49 @@
         '()
         table-name))))
 
-(defun process-data (table-name fn)
+(defun list-data (table-name)
   (let (((tuple 'atomic data) (query-data table-name)))
+    data))
+
+(defun process-data (table-name fn)
+  (progn
     (lists:map
       (lambda (x) (funcall fn x))
-      data))
-    'ok)
+      (lists:sort (list-data table-name)))
+    'ok))
 
 (defun show-data (table-name)
   (process-data
     table-name
     (lambda (x) (lfe_io:format '"~p~n" (list x)))))
 
-(defun list-groups ()
+(defun show-groups ()
   (process-data
     'roz-group
-    (lambda (x) (lfe_io:format '"~s~n" (list (roz-group-group-name x))))))
+    (lambda (x) (lfe_io:format '"* ~s~n" (list (roz-group-group-name x))))))
 
-(defun list-teams ()
+(defun show-teams ()
   (process-data
     'roz-team
-    (lambda (x) (lfe_io:format '"~s~n" (list (roz-team-team-name x))))))
+    (lambda (x) (lfe_io:format '"* ~s~n" (list (roz-team-team-name x))))))
 
-(defun list-products ()
+(defun show-products ()
   (process-data
     'roz-product
-    (lambda (x) (lfe_io:format '"~s~n" (list (roz-product-product-name x))))))
+    (lambda (x) (lfe_io:format '"* ~s~n" (list (roz-product-product-name x))))))
+
+(defun list-monsters ()
+  (lists:map
+    (lambda (x)
+      (list (roz-monster-last x)
+            (roz-monster-first x)
+            (roz-monster-nick x)))
+    (list-data 'roz-monster)))
+
+(defun show-monsters ()
+  (progn
+    (lists:map
+      (lambda (monster)
+        (lfe_io:format '"* ~s, ~s (~s)~n" monster))
+      (lists:sort (list-monsters))))
+    'ok)

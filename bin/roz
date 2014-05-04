@@ -16,7 +16,7 @@ print-usage () {
     scriptpath=$1
     scriptname=$(basename $scriptpath)
     command="$LFE roz-script-help usage $scriptpath $scriptname $FINISH"
-    #echo "comand: $command"
+    #echo "command: $command"
     eval $command
 }
 
@@ -55,7 +55,7 @@ do-repl () {
     echo "Starting roz REPL ..."
     echo
     command="ERL_LIBS=$(lfetool info erllibs) \
-    PATH=$(lfetool info path) lfe $DB $@"
+    PATH=$(lfetool info path) lfe $DB $START $@"
     #echo "command: $command"
     eval $command
 }
@@ -72,7 +72,7 @@ do-info-db () {
     echo "Getting DB info ..."
     echo
     command="$LFE mnesia info $FINISH"
-    #echo "comand: $command"
+    #echo "command: $command"
     eval $command
 }
 
@@ -86,7 +86,7 @@ do-info-table () {
     echo "Getting table info for '$tablename' ..."
     echo
     command="$LFE roz-structure table-info roz-$tablename $args $FINISH"
-    #echo "comand: $command"
+    #echo "command: $command"
     eval $command
 }
 
@@ -94,7 +94,7 @@ do-add-group () {
     echo "Adding group '$1' ..."
     echo
     command="$LFE roz-content add-group $@ $FINISH"
-    #echo "comand: $command"
+    #echo "command: $command"
     eval $command
 }
 
@@ -102,7 +102,7 @@ do-add-team () {
     echo "Adding team '$1' ..."
     echo
     command="$LFE roz-content add-team $@ $FINISH"
-    #echo "comand: $command"
+    #echo "command: $command"
     eval $command
 }
 
@@ -110,31 +110,47 @@ do-add-product () {
     echo "Adding product '$1' ..."
     echo
     command="$LFE roz-content add-product $@ $FINISH"
-    #echo "comand: $command"
+    #echo "command: $command"
     eval $command
 }
 
-do-list-groups () {
+do-add-monster () {
+    echo "Adding monster '$1' ..."
+    echo
+    command="$LFE roz-content add-monster $@ $FINISH"
+    #echo "command: $command"
+    eval $command
+}
+
+do-show-groups () {
     echo "Getting list of all groups ..."
     echo
-    command="$LFE roz-querying list-groups $FINISH"
-    #echo "comand: $command"
+    command="$LFE roz-querying show-groups $FINISH"
+    #echo "command: $command"
     eval $command
 }
 
-do-list-teams () {
+do-show-teams () {
     echo "Getting list of all teams ..."
     echo
-    command="$LFE roz-querying list-teams $FINISH"
-    #echo "comand: $command"
+    command="$LFE roz-querying show-teams $FINISH"
+    #echo "command: $command"
     eval $command
 }
 
-do-list-products () {
+do-show-products () {
     echo "Getting list of all products ..."
     echo
-    command="$LFE roz-querying list-products $FINISH"
-    #echo "comand: $command"
+    command="$LFE roz-querying show-products $FINISH"
+    #echo "command: $command"
+    eval $command
+}
+
+do-show-monsters () {
+    echo "Getting list of all monsters ..."
+    echo
+    command="$LFE roz-querying show-monsters $FINISH"
+    #echo "command: $command"
     eval $command
 }
 
@@ -173,6 +189,7 @@ run-info () {
 run-add () {
     subcommand=$1
     name=$2
+    shift 1
     case $subcommand in
         group)
             echo
@@ -189,6 +206,11 @@ run-add () {
             do-add-product "$name"
             exit 0
             ;;
+        monster)
+            echo
+            do-add-monster "$@"
+            exit 0
+            ;;
         *)
             unknown-subcommand-error $subcommand
             ;;
@@ -201,17 +223,22 @@ run-list () {
     case $subcommand in
         groups)
             echo
-            do-list-groups
+            do-show-groups
             exit 0
             ;;
         teams)
             echo
-            do-list-teams
+            do-show-teams
             exit 0
             ;;
         products)
             echo
-            do-list-products
+            do-show-products
+            exit 0
+            ;;
+        monsters)
+            echo
+            do-show-monsters
             exit 0
             ;;
         *)

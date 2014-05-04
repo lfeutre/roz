@@ -9,7 +9,9 @@
                                     first first
                                     last last
                                     org org)))
-    (add-group group)
+    (add-group group nick)
+    (add-team team nick)
+    (add-product product nick)
     (mnesia:transaction (lambda () (mnesia:write monster)))))
 
 (defun add-monsters
@@ -25,6 +27,12 @@
   (let* ((group (make-roz-group group-name (atom_to_list name))))
     (mnesia:transaction (lambda () (mnesia:write group)))))
 
+(defun add-group (name nick)
+  "Add a group with a relation to a monster."
+  (let ((link (make-roz-group-link monster-nick nick group-name name)))
+    (add-group name)
+    (mnesia:transaction (lambda () (mnesia:write link)))))
+
 (defun add-groups
   "A utility function for populating the group table from a list of lists."
   (('())
@@ -37,6 +45,12 @@
   "A utility function for adding an entry to the team table."
   (let* ((team (make-roz-team team-name (atom_to_list name))))
     (mnesia:transaction (lambda () (mnesia:write team)))))
+
+(defun add-team (name nick)
+  "Add a team with a relation to a monster."
+  (let ((link (make-roz-team-link monster-nick nick team-name name)))
+    (add-team name)
+    (mnesia:transaction (lambda () (mnesia:write link)))))
 
 (defun add-teams
   "A utility function for populating the group table from a list of lists."
@@ -51,6 +65,12 @@
   (let* ((product (make-roz-product product-name (atom_to_list name))))
     (mnesia:transaction (lambda () (mnesia:write product)))))
 
+(defun add-product (name nick)
+  "Add a product with a relation to a monster."
+  (let ((link (make-roz-product-link monster-nick nick product-name name)))
+    (add-product name)
+    (mnesia:transaction (lambda () (mnesia:write link)))))
+
 (defun add-products
   "A utility function for populating the product table from a list of lists."
   (('())
@@ -58,54 +78,3 @@
   (((cons (list name) tail))
    (add-product name)
    (add-products tail)))
-
-; (defun insert-employee (employee department-id project-names)
-;   "A utility function for populating the employee table and updating all the
-;   associated relationships."
-;   (mnesia:transaction
-;     (lambda ()
-;       (mnesia:write employee)
-;       (insert-department-relation (employee-id employee) department-id)
-;       (insert-project-relations (employee-id employee) project-names))))
-
-; (defun insert-department-relation (employee-id department-id)
-;   "A function that is used when establishing the relationship between an
-;   employee and a department."
-;   (let ((in-department (make-in-department
-;                               employee-id employee-id
-;                               department-id department-id)))
-;     (mnesia:write in-department)))
-
-; (defun insert-project-relations
-;   "A function that is used when establishing the relationships between an
-;   employee and any number of projects."
-;   ((_ '())
-;     'ok)
-;   ((employee-id (cons project-name tail))
-;     (let ((in-project (make-in-project
-;                         employee-id employee-id
-;                         project-name project-name)))
-;       (mnesia:write in-project)
-;       (insert-project-relations employee-id tail))))
-
-; (defun insert-employees
-;   "Batch 'em up."
-;   (('())
-;     'ok)
-;   (((cons (list id nm sal gen ph rm dep projs) tail))
-;     (let ((employee (make-employee
-;                       id id
-;                       name nm
-;                       salary sal
-;                       gender gen
-;                       phone ph
-;                       room-number rm)))
-;       (insert-employee employee dep projs)
-;       (insert-employees tail))))
-
-; (defun insert-manager (employee-id department-id)
-;   (mnesia:transaction
-;     (lambda ()
-;       (mnesia:write
-;         (make-manager employee-id employee-id
-;                       department-id department-id)))))
