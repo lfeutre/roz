@@ -71,6 +71,16 @@ configured above) and all the dependency libs configured:
 
     $ ./bin/roz repl
 
+Result:
+
+.. code:: bash
+
+    Starting roz REPL ...
+
+    Erlang R16B03-1 (erts-5.10.4) [source] [64-bit] [smp:8:8] [async-threads:10] [hipe] [kernel-poll:false]
+
+    LFE Shell V5.10.4 (abort with ^G)
+    >
 
 Version
 -------
@@ -79,6 +89,18 @@ Version
 
     $ ./bin/roz -v
     $ ./bin/roz version
+
+Output:
+
+.. code:: cl
+
+    Version info:
+
+    (#(erlang "R16B03-1")
+     #(emulator "5.10.4")
+     #(driver-version "2.2")
+     #(lfe "0.6.2")
+     #(roz "0.0.1"))
 
 
 Help
@@ -89,6 +111,22 @@ Help
     $ ./bin/roz -h
     $ ./bin/roz help
 
+Output:
+
+.. code:: bash
+
+    Usage: ./bin/roz <command> <subcommand> [<args>]
+
+    The easiest way to use roz is with the bash tab-completion script provided:
+      $ . ./resources/bash/completion
+
+    Available commands include: help, version, init, repl, add, info, list.
+
+    Some of these have subcommands.
+
+    Full documentation for all the commands is avaiable here:
+      https://github.com/lfe/roz/blob/master/README.rst#cli-usage
+      
 These are also printed when an error is caught in the script.
 
 
@@ -98,6 +136,11 @@ Initialize roz Data
 .. code:: bash
 
     $ ./bin/roz init
+    
+Output:
+
+.. code:: cl
+
     Initializing roz data ...
 
 
@@ -133,9 +176,9 @@ that as well:
 
 .. code:: bash
 
-  $ ./bin/roz add group Software-Development
-  $ ./bin/roz add team Messaging
-  $ ./bin/roz add product Rabbit-MQ
+    $ ./bin/roz add group Software-Development
+    $ ./bin/roz add team Messaging
+    $ ./bin/roz add product Rabbit-MQ
 
 Note that only single-word arguments are allowed. If your group, team, or
 project has more than one word in it, join them with a hyphen.
@@ -151,6 +194,17 @@ Listing Data
     $ ./bin/roz list products
     $ ./bin/roz list monsters
 
+Sample output:
+
+.. code:: bash
+
+    Getting list of all monsters ...
+
+    * Carol, Bob (bob321)
+    * Davids, Carol (carol890)
+    * Eve, David (deve29)
+    * Fredericks, Evy (ev314)
+
 
 Getting Info
 ------------
@@ -159,12 +213,60 @@ Getting Info
 
     $ ./bin/roz info db
 
+Sample output:
+
+.. code:: erlang
+
+    Getting DB info ...
+
+    ---> Processes holding locks <---
+    ---> Processes waiting for locks <---
+    ---> Participant transactions <---
+    ---> Coordinator transactions <---
+    ---> Uncertain transactions <---
+    ---> Active tables <---
+    schema         : with 9        records occupying 1362     words of mem
+    roz-team       : with 2        records occupying 367      words of mem
+    roz-product    : with 4        records occupying 379      words of mem
+    roz-input      : with 0        records occupying 305      words of mem
+    roz-comment    : with 0        records occupying 305      words of mem
+    roz-group      : with 3        records occupying 393      words of mem
+    roz-rating     : with 0        records occupying 305      words of mem
+    roz-output     : with 0        records occupying 305      words of mem
+    roz-monster    : with 5        records occupying 355      words of mem
+    ===> System info in version "4.11", debug level = none <===
+    opt_disc. Directory "/Users/oubiwann/Dropbox/lab/erlang/roz/MyCompany" is used.
+    use fallback at restart = false
+    running db nodes   = [nonode@nohost]
+    stopped db nodes   = []
+    master node tables = []
+    remote             = []
+    ram_copies         = []
+    disc_copies        = ['roz-comment','roz-group','roz-input','roz-monster',
+                          'roz-output','roz-product','roz-rating','roz-team',
+                          schema]
+    disc_only_copies   = []
+    [{nonode@nohost,disc_copies}] = ['roz-monster','roz-output','roz-rating',
+                                     'roz-group','roz-comment','roz-input',
+                                     'roz-product','roz-team',schema]
+    2 transactions committed, 0 aborted, 0 restarted, 0 logged to disc
+    0 held locks, 0 in queue; 0 local transactions, 0 remote
+    0 transactions waits for other nodes: []
+
 .. code:: bash
 
-    $ ./bin/roz info table group size
-    $ ./bin/roz info table group type
-    $ ./bin/roz info table group attributes
     $ ./bin/roz info table group all
+    $ ./bin/roz info table team size
+    $ ./bin/roz info table product type
+    $ ./bin/roz info table monsters attributes
+    
+Sample output for that last command:
+
+.. code:: cl
+
+    Getting table info for 'monster', key 'attributes' ...
+
+    (nick first last org)
 
 For a full list of allowed table info parameters, see the
 `mnesia:table_info`_ docs.
