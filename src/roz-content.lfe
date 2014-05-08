@@ -78,3 +78,14 @@
   (((cons (list name) tail))
    (add-product name)
    (add-products tail)))
+
+(defun add-kudo (type dim sub-dim multiplier nick)
+  "Add a kudo for a monster."
+  (let* ((now (calendar:now_to_local_time (erlang:now)))
+         ((tuple (tuple year month day) (tuple hour min sec)) now)
+         (stamp (io_lib:format
+                   '"~4.10.0B-~2.10.0B-~2.10.0B ~2.10.0B:~2.10.0B:~2.10.0B"
+                   (list year month day hour min sec)))
+         (kudo (make-roz-comment type type dimension dim sub-dimension sub-dim
+                multiplier multiplier time-stamp stamp recipient nick)))
+    (mnesia:transaction (lambda () (mnesia:write kudo)))))

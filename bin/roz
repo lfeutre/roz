@@ -79,13 +79,13 @@ do-info-db () {
 do-info-table () {
     tablename=$1
     shift 1
-    args=$@
-    if [ "$args" = "" ]; then
-        args=all
+    key=$@
+    if [ "$key" = "" ]; then
+        key=all
     fi
-    echo "Getting table info for '$tablename' ..."
+    echo "Getting table info for '$tablename', key '$key' ..."
     echo
-    command="$LFE roz-structure table-info roz-$tablename $args $FINISH"
+    command="$LFE roz-structure table-info roz-$tablename $key $FINISH"
     #echo "command: $command"
     eval $command
 }
@@ -119,6 +119,22 @@ do-add-monster () {
     echo
     command="$LFE roz-content add-monster $@ $FINISH"
     #echo "command: $command"
+    eval $command
+}
+
+do-add-kudo () {
+    echo "Adding kudo '$1:$2' ..."
+    echo
+    command="$LFE roz-content add-kudo $@ $FINISH"
+    echo "command: $command"
+    eval $command
+}
+
+do-add-concern () {
+    echo "Adding concern '$1:$2' ..."
+    echo
+    command="$LFE roz-content add-concern $@ $FINISH"
+    echo "command: $command"
     eval $command
 }
 
@@ -209,6 +225,16 @@ run-add () {
         monster)
             echo
             do-add-monster "$@"
+            exit 0
+            ;;
+        kudo)
+            echo
+            do-add-kudo "$@"
+            exit 0
+            ;;
+        concern)
+            echo
+            do-add-concern "$@"
             exit 0
             ;;
         *)

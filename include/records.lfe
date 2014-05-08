@@ -5,9 +5,13 @@
   (org '()))
 
 (defrecord roz-comment
+  (type '()) ; kudo or concern
   (id '())
+  (dimension '())
+  (sub-dimension '())
+  (multiplier 1)
   (time-stamp '())
-  (type '())
+  (recipient '())
   (source '())
   (content '()))
 

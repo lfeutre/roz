@@ -183,6 +183,13 @@ that as well:
 Note that only single-word arguments are allowed. If your group, team, or
 project has more than one word in it, join them with a hyphen.
 
+Adding kudos or concerns for a monster:
+
+.. code:: bash
+
+  $ ./bin/roz add kudo job-specific prob-solve 4 ev314
+  $ ./bin/roz add concern universal diversity-commit 2 bob321
+
 
 Listing Data
 ------------
