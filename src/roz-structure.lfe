@@ -55,3 +55,6 @@
     '(roz-monster roz-comment roz-rating roz-group roz-team roz-product
       roz-input roz-output)
     5000))
+
+(defun delete-table (table-name)
+  (mnesia:delete_table table-name))

@@ -154,6 +154,14 @@ do-show-monsters () {
     eval $command
 }
 
+do-delete-table () {
+    tablename=$1
+    echo "Deleting table '$tablename' ..."
+    command="$LFE roz-structure delete-table $tablename $FINISH"
+    #echo "command: $command"
+    eval $command
+}
+
 run-info () {
     script=$1
     subcommand=$2
@@ -246,6 +254,22 @@ run-list () {
             ;;
     esac
 }
+
+run-delete () {
+    subcommand=$1
+    tablename=$2
+    case $subcommand in
+        table)
+            echo
+            do-delete-table $tablename
+            exit 0
+            ;;
+        *)
+            unknown-subcommand-error $subcommand
+            ;;
+    esac
+}
+
 run () {
     script=$0
     command=$1
@@ -279,6 +303,10 @@ run () {
         repl)
             shift 1
             do-repl "$@"
+            exit 0
+            ;;
+        delete)
+            run-delete $subcommand "$@" | clean-ok
             exit 0
             ;;
         *)
