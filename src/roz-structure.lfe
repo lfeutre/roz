@@ -4,6 +4,9 @@
 (include-lib "include/records.lfe")
 (include-lib "deps/lfe-utils/include/mnesia-macros.lfe")
 
+(defun get-default-attrs ()
+  `(#(disc_copies (,(node)))))
+
 (defun create-set-tables (default-attrs)
   "Define the tables that need unique entries."
   (let ((attrs (++ default-attrs '(#(type set)))))
@@ -40,7 +43,7 @@
     (mnesia:table_info table-name info-key)))
 
 (defun init ()
-  (let* ((attrs `(#(disc_copies (,(node)))))
+  (let* ((attrs (get-default-attrs))
          (sets (create-set-tables attrs))
          (bags (create-bag-tables attrs))
          (status (get-status (++ sets bags))))
@@ -58,3 +61,9 @@
 
 (defun delete-table (table-name)
   (mnesia:delete_table table-name))
+
+; (defun add-set-table (table-name)
+;   (create-table table-name (++ (get-default-attrs) '(#(type set)))))
+
+; (defun add-bag-table (table-name)
+;   (create-table table-name (++ (get-default-attrs) '(#(type bag)))))

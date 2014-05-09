@@ -39,6 +39,11 @@ unknown-subcommand-error () {
     error "Unknown subcommand: '$subcommand'";
 }
 
+subcommand-not-implemented-error () {
+    subcommand=$1
+    error "Subcommand '$subcommand' is not yet implemented.";
+}
+
 clean-ok () {
     egrep -v '^ok$'
 }
@@ -64,7 +69,7 @@ do-init () {
     echo "Initializing roz data ..."
     echo
     command="$LFE_INIT roz init $FINISH"
-    #echo "command: $command"
+    echo "command: $command"
     eval $command
 }
 
@@ -154,6 +159,22 @@ do-show-monsters () {
     eval $command
 }
 
+do-add-set-table () {
+    tablename=$1
+    echo "Adding set table '$tablename' ..."
+    command="$LFE roz-structure add-set-table $tablename $FINISH"
+    echo "command: $command"
+    eval $command
+}
+
+do-add-bag-table () {
+    tablename=$1
+    echo "Adding bag table '$tablename' ..."
+    command="$LFE roz-structure add-bag-table $tablename $FINISH"
+    echo "command: $command"
+    eval $command
+}
+
 do-delete-table () {
     tablename=$1
     echo "Deleting table '$tablename' ..."
@@ -218,6 +239,18 @@ run-add () {
             echo
             do-add-monster "$@"
             exit 0
+            ;;
+        bag-table)
+            echo
+            subcommand-not-implemented-error "$subcommand"
+            #do-add-bag-table "$name"
+            #exit 0
+            ;;
+        set-table)
+            echo
+            subcommand-not-implemented-error "$subcommand"
+            #do-add-set-table "$name"
+            #exit 0
             ;;
         *)
             unknown-subcommand-error $subcommand
